@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Muscle{% endblock %}
+
+{% block body %}
+    <h1>Create new Muscle</h1>
+
+    {{ include('muscle/_form.html.twig') }}
+
+    <a href="{{ path('muscle_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Muscle index{% endblock %}
+
+{% block body %}
+    <h1>Muscle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for muscle in muscles %}
+            <tr>
+                <td>{{ muscle.id }}</td>
+                <td>{{ muscle.title }}</td>
+                <td>{{ muscle.location }}</td>
+                <td>
+                    <a href="{{ path('muscle_show', {'id': muscle.id}) }}">show</a>
+                    <a href="{{ path('muscle_edit', {'id': muscle.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('muscle_new') }}">Create new</a>
+{% endblock %}

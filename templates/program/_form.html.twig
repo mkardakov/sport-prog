@@ -1,0 +1,73 @@
+{{ form_start(form) }}
+
+<div class="form-control">
+    <i class="fa fa-calendar"></i> {{ form_label(form.title) }}
+    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+
+    <small>{{ form_help(form.title) }}</small>
+
+    <div class="form-error">
+        {{ form_errors(form.title) }}
+    </div>
+</div>
+<div class="form-control">
+    <i class="fa fa-calendar"></i> {{ form_label(form.startDate) }}
+    {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+
+    <small>{{ form_help(form.startDate) }}</small>
+
+    <div class="form-error">
+        {{ form_errors(form.startDate) }}
+    </div>
+</div>
+<div class="form-control">
+    <i class="fa fa-calendar"></i> {{ form_label(form.endDate) }}
+    {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+
+    <small>{{ form_help(form.endDate) }}</small>
+
+    <div class="form-error">
+        {{ form_errors(form.endDate) }}
+    </div>
+</div>
+{{ form_row(form.user) }}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Упражнение</th>
+        <th scope="col">Вес</th>
+        <th scope="col">Повторения</th>
+        <th scope="col">Повторы</th>
+        <th scope="col">Повторения</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user_exercise in program.exercises %}
+        <tr>
+            <td>{{ user_exercise.id }}</td>
+            <td>{{ user_exercise.exercise.title }}</td>
+            <td>{{ user_exercise.weight }}</td>
+            <td>{{ user_exercise.repetition }}</td>
+            <td>{{ user_exercise.setTotal }}</td>
+            <td>
+                <a href="{{ path('user_exercise_show', {'id': user_exercise.id}) }}">show</a>
+                <a href="{{ path('user_exercise_edit', {'id': user_exercise.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+
+    {% endfor %}
+    <tr>
+        <td colspan="6"><button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success mb-2">+</button></td>
+    </tr>
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary mb-2">Save</button>
+{{ form_end(form) }}
+
+{% include 'user_exercise/modal_form.html.twig' %}
